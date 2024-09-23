@@ -1,4 +1,3 @@
-import random
 import time
 from django.http import HttpResponse
 from django.shortcuts import render
@@ -16,7 +15,6 @@ def home(request):
     #create dictionary of context variable for the template
     context = {
         "current_time": time.ctime(),
-        "letter1": chr(random.randomint(65,95)),
     }
 
     # create and return a response to the client 

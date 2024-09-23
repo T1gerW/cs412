@@ -1,0 +1,9 @@
+{% extends 'quotes/base.html' %}
+{% load static %}  <!-- Ensure the static tag is loaded to reference static files -->
+
+{% block content %}
+    <div class="quote-container">
+        <p>{{ quote.quote }}</p>  <!-- Display the selected quote -->
+        <img src="{% static image %}" alt="Image of {{ quote.person }}">  <!-- Display the selected image -->
+    </div>
+{% endblock %}
