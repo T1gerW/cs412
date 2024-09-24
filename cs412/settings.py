@@ -128,8 +128,13 @@ STATICFILES_DIRS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # Add this line
-    # other middlewares
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # This should be here if you're using Whitenoise for static files
+    'django.contrib.sessions.middleware.SessionMiddleware',  # Required for admin and user sessions
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',  # Required for admin and user authentication
+    'django.contrib.messages.middleware.MessageMiddleware',  # Required for Django messages framework
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
 # Enable gzip compression for static files
