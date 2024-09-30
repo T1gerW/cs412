@@ -24,7 +24,10 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("hw/", include("hw.urls")), ##created URL hw/, and associate it with URLS in another file 
     path("quotes/", include("quotes.urls")), 
-    path("", include("quotes.urls")), 
+    ##path("", include("quotes.urls")),
+    path("formdata", include("formdata.urls")), ##new app from class
+    path("restaurant/", include("restaurant.urls")), ##assignment 4
+    path("", include("restaurant.urls")), 
 
 ] + static(settings.STATIC_URL,
            document_root = settings.STATIC_ROOT)

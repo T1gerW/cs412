@@ -1,0 +1,23 @@
+<!-- restaurant/templates/restaurant/main.html -->
+{% extends 'restaurant/base.html' %}
+
+{% load static %} 
+
+{% block title %}Main - Our Restaurant{% endblock %}
+
+{% block content %}
+<h2>Welcome to Our Restaurant!</h2>
+<p>We are located at: 123 Delicious Lane, Food City, FC 45678</p>
+
+<h3>Hours of Operation:</h3>
+<ul>
+    <li>Monday - Friday: 11:00 AM - 10:00 PM</li>
+    <li>Saturday: 12:00 PM - 11:00 PM</li>
+    <li>Sunday: Closed</li>
+</ul>
+
+<h3>Our Restaurant</h3>
+<img src="{%static 'images/fray on fraser.jpg' %}" alt="Restaurant Photo" style="width:300px; height:200px;">
+
+<p>Come visit us for an amazing dining experience!</p>
+{% endblock %}
