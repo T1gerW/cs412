@@ -1,0 +1,24 @@
+
+
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mini Facebook</title>
+    <link rel="stylesheet" href="{% static 'mini_fb/styles-mini_fb.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Mini Facebook</h1>
+        <nav>
+            <ul>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+</body>
+</html>

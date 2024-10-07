@@ -1,0 +1,22 @@
+{% extends 'mini_fb/base.html' %}
+
+{% block title %}All Profiles{% endblock %}
+
+{% block content %}
+    <h2>All User Profiles</h2>
+    <div class="profile-container">
+        {% for profile in profiles %}
+            <div class="profile-card">
+                {% if profile.profile_image_url %}
+                    <img src="{{ profile.profile_image_url }}" alt="{{ profile.first_name }}'s Profile Picture">
+                {% else %}
+                    <img src="https://via.placeholder.com/150" alt="No Profile Picture">
+                {% endif %}
+                <p><strong>First Name:</strong> {{ profile.first_name }}</p>
+                <p><strong>Last Name:</strong> {{ profile.last_name }}</p>
+                <p><strong>City:</strong> {{ profile.city }}</p>
+                <p><strong>Email:</strong> {{ profile.email }}</p>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock content %}
