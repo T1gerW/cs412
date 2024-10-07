@@ -28,6 +28,7 @@ urlpatterns = [
     path("formdata", include("formdata.urls")), ##new app from class
     path("restaurant/", include("restaurant.urls")), ##assignment 4
     path("", include("restaurant.urls")), 
+    path("blog/", include("blog.urls")),
 
 ] + static(settings.STATIC_URL,
            document_root = settings.STATIC_ROOT)
