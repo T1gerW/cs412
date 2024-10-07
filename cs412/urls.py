@@ -29,6 +29,7 @@ urlpatterns = [
     path("restaurant/", include("restaurant.urls")), ##assignment 4
     path("", include("restaurant.urls")), 
     path("blog/", include("blog.urls")),
+    path("mini_fb/", include("mini_fb.urls")),
 
 ] + static(settings.STATIC_URL,
            document_root = settings.STATIC_ROOT)

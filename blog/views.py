@@ -8,7 +8,7 @@ from .models import *
 
 
 # class-based view 
-class ShowAllView(ListView):
+class ShowAllProfilesView(ListView):
     '''the view to show all Articles'''
     model = Article
     template_name = 'blog/show_all.html'
