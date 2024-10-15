@@ -27,7 +27,7 @@ urlpatterns = [
     ##path("", include("quotes.urls")),
     path("formdata", include("formdata.urls")), ##new app from class
     path("restaurant/", include("restaurant.urls")), ##assignment 4
-    path("", include("restaurant.urls")), 
+    ##path("", include("restaurant.urls")), 
     path("blog/", include("blog.urls")),
     path("mini_fb/", include("mini_fb.urls")),
 

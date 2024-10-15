@@ -33,7 +33,10 @@
             {{ form.profile_image_url }}
         </div>
 
-        <!-- Submit button -->
-        <button type="submit">Create Profile</button>
+        <!-- Submit and Cancel buttons -->
+        <div class="form-buttons">
+            <button type="submit" class="btn btn-primary">Create Profile</button>
+            <a href="{% url 'show_all_profiles' %}" class="btn btn-primary">Cancel</a> 
+        </div>
     </form>
 {% endblock content %}
