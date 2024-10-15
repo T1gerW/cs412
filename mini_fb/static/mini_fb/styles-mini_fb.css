@@ -52,19 +52,3 @@ footer {
     bottom: 0;
     width: 100%;
 }
-
-/* Button styling */
-.btn {
-    padding: 8px 12px;
-    border-radius: 5px;
-    font-size: 1em;
-    text-decoration: none;
-    color: #333;
-    background-color: #e7e7e7;  /* Light grey */
-    border: none;
-    cursor: pointer;
-}
-
-.btn-primary:hover {
-    background-color: #ccc;  /* Darker grey on hover */
-}
