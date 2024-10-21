@@ -28,6 +28,8 @@
                         {% endfor %}
                     </div>
                 {% endif %}
+                <a href="{% url 'update_status' status.pk %}" class="btn btn-primary">Update</a>
+                <a href="{% url 'delete_status' status.pk %}" class="btn btn-danger">Delete</a>
             </li>
         {% empty %}
             <li>No status messages available.</li>
@@ -39,4 +41,7 @@
     
     <br>
     <a href="{% url 'show_all_profiles' %}">Back to all profiles</a>
+
+    <a href="{% url 'update_profile' profile.pk %}" class="btn btn-primary">Update Profile</a>
+
 {% endblock content %}
