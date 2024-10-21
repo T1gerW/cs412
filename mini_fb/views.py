@@ -33,28 +33,30 @@ class CreateStatusMessageView(CreateView):
     template_name = 'mini_fb/create_status_form.html'
 
     def form_valid(self, form):
-        # Assign the profile to the status message before saving
         profile = Profile.objects.get(pk=self.kwargs['pk'])
         form.instance.profile = profile
+
+        # Save the status message to the database
+        sm = form.save()
+
+        # Handle file uploads (images)
+        files = self.request.FILES.getlist('files')
+        print(f"Uploaded files: {files}")  # Check if files are being uploaded
+        for file in files:
+            image = Image(status_message=sm, image_file=file)
+            image.save()
+            print(f"Saved image: {image.image_file.url}")  # Check the image URL after saving
+
         return super().form_valid(form)
+
 
     def get_success_url(self):
         # Redirect back to the profile page after the status message is created
         return reverse('show_profile', kwargs={'pk': self.kwargs['pk']})
-    
-    def form_valid(self, form):
-        # Step (a): Look up the Profile object using the pk in self.kwargs
-        profile = Profile.objects.get(pk=self.kwargs['pk'])
-        
-        # Step (b): Attach the Profile object to the status message
-        form.instance.profile = profile
-        
-        # Save the form and create the StatusMessage
-        return super().form_valid(form)
-    
+
     def get_context_data(self, **kwargs):
         # Add the profile object to the context
         context = super().get_context_data(**kwargs)
         profile = Profile.objects.get(pk=self.kwargs['pk'])
-        context['profile'] = profile  # Add profile to context
+        context['profile'] = profile
         return context

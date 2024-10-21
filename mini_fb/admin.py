@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Profile, StatusMessage
+from .models import Profile, StatusMessage,Image
 
 # Register your models here.
 
@@ -7,3 +7,4 @@ from .models import Profile, StatusMessage
 # Register the Profile model to appear in the admin site
 admin.site.register(Profile)
 admin.site.register(StatusMessage)
+admin.site.register(Image)

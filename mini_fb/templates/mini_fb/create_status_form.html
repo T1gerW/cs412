@@ -5,19 +5,24 @@
 {% block content %}
     <h2>Post a New Status Message for {{ profile.first_name }} {{ profile.last_name }}</h2>
 
-    <!-- Form starts here -->
-    <form method="post" action="{% url 'create_status' profile.pk %}" class="status-form">
+    <form method="post" action="{% url 'create_status' profile.pk %}" enctype="multipart/form-data" class="status-form">
         {% csrf_token %}
         
         <div class="form-group">
             <label for="id_message">Message:</label>
             {{ form.message }}
         </div>
-
-        <!-- Submit and Cancel buttons -->
+    
+        <!-- File upload field for images -->
+        <div class="form-group">
+            <label for="files">Upload Images:</label>
+            <input type="file" name="files" multiple />
+        </div>
+    
         <div class="form-buttons">
             <button type="submit" class="btn btn-primary">Create Status</button>
-            <a href="{% url 'show_profile' profile.pk %}" class="btn btn-secondary">Cancel</a>
+            <a href="{% url 'show_profile' profile.pk %}" class="btn btn-primary">Cancel</a>
         </div>
     </form>
+    
 {% endblock content %}

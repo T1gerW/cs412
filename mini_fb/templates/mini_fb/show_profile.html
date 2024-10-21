@@ -19,6 +19,15 @@
         {% for status in profile.get_status_messages %}
             <li>
                 <p><strong>{{ status.timestamp }}:</strong> {{ status.message }}</p>
+
+                <!-- Display images if they exist -->
+                {% if status.get_images %}
+                    <div class="status-images">
+                        {% for img in status.get_images %}
+                            <img src="{{ img.image_file.url }}" alt="Status Image" width="200">
+                        {% endfor %}
+                    </div>
+                {% endif %}
             </li>
         {% empty %}
             <li>No status messages available.</li>

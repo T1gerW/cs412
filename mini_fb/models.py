@@ -29,4 +29,23 @@ class StatusMessage(models.Model):
     def __str__(self):
         return f"Status by {self.profile.first_name} on {self.timestamp}: {self.message[:20]}..."  # Shows first 20 chars of message
     
+    def get_images(self):
+        # Retrieve all images associated with this StatusMessage
+        return self.images.all()  # `images` is the related_name from the Image model
+
+class Image(models.Model):
+    # The image file field that will store the image in the media directory
+    image_file = models.ImageField(upload_to='status_images/')  # Stores images in media/status_images/
+    
+    # Timestamp of when the image was uploaded
+    timestamp = models.DateTimeField(default=timezone.now)
+    
+    # ForeignKey to the StatusMessage model (many-to-one relationship)
+    status_message = models.ForeignKey('StatusMessage', on_delete=models.CASCADE, related_name='images')
+
+    def __str__(self):
+        return f"Image for StatusMessage {self.status_message.id} uploaded on {self.timestamp}"
+
+
+    
 
