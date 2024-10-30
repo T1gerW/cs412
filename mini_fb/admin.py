@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Profile, StatusMessage,Image
+from .models import Profile, StatusMessage,Image, Friend
 
 # Register your models here.
 
@@ -8,3 +8,4 @@ from .models import Profile, StatusMessage,Image
 admin.site.register(Profile)
 admin.site.register(StatusMessage)
 admin.site.register(Image)
+admin.site.register(Friend)

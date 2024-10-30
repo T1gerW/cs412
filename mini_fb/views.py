@@ -1,7 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 
 # Create your views here.
-from django.views.generic import ListView, DetailView, CreateView, DeleteView
+from django.views.generic import ListView, DetailView, CreateView, DeleteView,View
 from .models import *
 from .forms import * 
 from django.views.generic import UpdateView
@@ -93,3 +93,47 @@ class UpdateStatusMessageView(UpdateView):
         # Redirect back to the profile page after updating the status message
         profile_id = self.object.profile.pk
         return reverse('show_profile', kwargs={'pk': profile_id})
+    
+class CreateFriendView(View):
+    def dispatch(self, request, *args, **kwargs):
+        # Get the two Profile objects based on URL parameters
+        pk = self.kwargs.get('pk')
+        other_pk = self.kwargs.get('other_pk')
+        profile = get_object_or_404(Profile, pk=pk)
+        other_profile = get_object_or_404(Profile, pk=other_pk)
+
+        # Call the add_friend method and store the result
+        result = profile.add_friend(other_profile)
+
+        # Optional: Display a message based on result (e.g., using Django messages framework)
+
+        # Redirect back to the profile page of the initiating profile
+        return redirect('show_profile', pk=pk)
+
+class ShowFriendSuggestionsView(DetailView):
+    model = Profile
+    template_name = 'mini_fb/friend_suggestions.html'
+    context_object_name = 'profile'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        
+        # Get friend suggestions for the profile
+        profile = self.get_object()
+        context['friend_suggestions'] = profile.get_friend_suggestions()
+        
+        return context
+    
+class ShowNewsFeedView(DetailView):
+    model = Profile
+    template_name = 'mini_fb/news_feed.html'
+    context_object_name = 'profile'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        
+        # Get the news feed for the profile
+        profile = self.get_object()
+        context['news_feed'] = profile.get_news_feed()
+        
+        return context
