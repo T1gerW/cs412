@@ -13,7 +13,7 @@
     </form>
 
     <!-- Cancel Form -->
-    <form method="get" action="{% url 'show_profile' status_message.profile.pk %}">
+    <form method="get" action="{% url 'view_profile' status_message.profile.pk %}">
         <button type="submit" class="btn btn-secondary">Cancel</button>
     </form>
 {% endblock content %}

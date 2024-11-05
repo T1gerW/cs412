@@ -18,7 +18,7 @@
                 {% endif %}
 
                 <!-- Link to add friend -->
-                <a href="{% url 'add_friend' profile.pk suggestion.pk %}" class="btn btn-primary">Add Friend</a>
+                <a href="{% url 'add_friend' suggestion.pk %}" class="btn btn-primary">Add Friend</a>
             </li>
         {% empty %}
             <li>No friend suggestions available.</li>
@@ -26,5 +26,5 @@
     </ul>
 
     <!-- Link back to the profile page -->
-    <a href="{% url 'show_profile' profile.pk %}" class="btn btn-secondary">Back to Profile</a>
+    <a href="{% url 'show_profile'  %}" class="btn btn-secondary">Back to Profile</a>
 {% endblock content %}

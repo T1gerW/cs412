@@ -7,7 +7,8 @@
     <div class="profile-container">
         {% for profile in profiles %}
             <div class="profile-card">
-                <a href="{% url 'show_profile' profile.pk %}">
+                <!-- Link to each profile's specific page using view_profile and profile.pk -->
+                <a href="{% url 'view_profile' profile.pk %}">
                     {% if profile.profile_image_url %}
                         <img src="{{ profile.profile_image_url }}" alt="{{ profile.first_name }}'s Profile Picture">
                     {% else %}
@@ -15,7 +16,7 @@
                     {% endif %}
                 </a>
                 <p><strong>First Name:</strong> 
-                    <a href="{% url 'show_profile' profile.pk %}">{{ profile.first_name }} {{ profile.last_name }}</a>
+                    <a href="{% url 'view_profile' profile.pk %}">{{ profile.first_name }} {{ profile.last_name }}</a>
                 </p>
                 <p><strong>City:</strong> {{ profile.city }}</p>
                 <p><strong>Email:</strong> {{ profile.email }}</p>

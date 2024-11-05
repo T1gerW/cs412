@@ -5,7 +5,7 @@
 {% block content %}
     <h2>Post a New Status Message for {{ profile.first_name }} {{ profile.last_name }}</h2>
 
-    <form method="post" action="{% url 'create_status' profile.pk %}" enctype="multipart/form-data" class="status-form">
+    <form method="post" action="{% url 'create_status' %}" enctype="multipart/form-data" class="status-form">
         {% csrf_token %}
         
         <div class="form-group">
@@ -21,7 +21,7 @@
     
         <div class="form-buttons">
             <button type="submit" class="btn btn-primary">Create Status</button>
-            <a href="{% url 'show_profile' profile.pk %}" class="btn btn-primary">Cancel</a>
+            <a href="{% url 'show_profile' %}" class="btn btn-primary">Cancel</a>
         </div>
     </form>
     

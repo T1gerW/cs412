@@ -38,39 +38,42 @@
 
      <!-- Friends Section -->
      <h3>{{ profile.first_name }}'s Friends</h3>
-     <div class="friends-container">
-         {% for friend in profile.get_friends %}
-             <div class="friend-card">
-                 <a href="{% url 'show_profile' friend.pk %}">
-                    <ul>
-                        <li>{% if friend.profile_image_url %}
-                         <img src="{{ friend.profile_image_url }}" alt="{{ friend.first_name }}'s Profile Picture" width="150" height="150">
-                     {% else %}
-                         <img src="https://via.placeholder.com/100" alt="No Profile Picture" class="friend-image">
-                     {% endif %}
-                     <p class="friend-name">{{ friend.first_name }} {{ friend.last_name }}</p>
-                    </li>
-                    </ul>
-                 </a>
-             </div>
-         {% empty %}
-             <p>No friends to display.</p>
-         {% endfor %}
-     </div>
-
-   <a href="{% url 'friend_suggestions' profile.pk %}" class="btn btn-primary">View Friend Suggestions</a>
-    <br>
-    <br>
-    <a href="{% url 'news_feed' profile.pk %}" class="btn btn-primary">View News Feed</a>
-    <br>
-    <br>
+        <div class="friends-container">
+            {% for friend in profile.get_friends %}
+                <div class="friend-card">
+                    <a href="{% url 'view_profile' friend.pk %}">
+                        <ul>
+                            <li>
+                                {% if friend.profile_image_url %}
+                                    <img src="{{ friend.profile_image_url }}" alt="{{ friend.first_name }}'s Profile Picture" width="150" height="150">
+                                {% else %}
+                                    <img src="https://via.placeholder.com/100" alt="No Profile Picture" class="friend-image">
+                                {% endif %}
+                                <p class="friend-name">{{ friend.first_name }} {{ friend.last_name }}</p>
+                            </li>
+                        </ul>
+                    </a>
+                </div>
+            {% empty %}
+                <p>No friends to display.</p>
+            {% endfor %}
+</div>
+     {% if user.is_authenticated and user == profile.user %}
+        <a href="{% url 'friend_suggestions' %}" class="btn btn-primary">View Friend Suggestions</a>
+        <br>
+        <br>
+        <a href="{% url 'news_feed' %}" class="btn btn-primary">View News Feed</a>
+        <br>
+        <br>
     <!-- Link to create a new status message -->
-    <a href="{% url 'create_status' profile.pk %}"> Post a New Status Message</a>
-    <br>
-    <br>
-    <a href="{% url 'show_all_profiles' %}">Back to all profiles</a>
-    <br>
-    <br>
-    <a href="{% url 'update_profile' profile.pk %}" class="btn btn-primary">Update Profile</a>
+        <a href="{% url 'create_status' %}"> Post a New Status Message</a>
+        <br>
+        <br>
+        <a href="{% url 'update_profile' %}" class="btn btn-primary">Update Profile</a>
+        {% endif %}
+
+        <br>
+        <br>
+        <a href="{% url 'show_all_profiles' %}">Back to all profiles</a>
     
 {% endblock content %}

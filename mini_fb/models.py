@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 from django.utils import timezone
@@ -6,6 +7,7 @@ from django.urls import reverse
 from django.db.models import Q
 
 class Profile(models.Model):
+    user = models.ForeignKey(User, on_delete=models.SET_DEFAULT, default=1)  # Replace 1 with the ID of your admin user
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     city = models.CharField(max_length=100)

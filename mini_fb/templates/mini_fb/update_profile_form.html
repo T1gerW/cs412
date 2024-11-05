@@ -6,28 +6,44 @@
     <h2>Update Profile for {{ profile.first_name }} {{ profile.last_name }}</h2>
 
     <!-- Form starts here -->
-    <form method="post" action="{% url 'update_profile' profile.pk %}">
+    <form method="post">
         {% csrf_token %}
-
+    
+        <div class="form-group">
+            <label for="id_first_name">First Name:</label>
+            {{ form.first_name }}
+        </div>
+    
+        <div class="form-group">
+            <label for="id_last_name">Last Name:</label>
+            {{ form.last_name }}
+        </div>
+    
         <div class="form-group">
             <label for="id_city">City:</label>
             {{ form.city }}
         </div>
-
+    
         <div class="form-group">
             <label for="id_email">Email:</label>
             {{ form.email }}
         </div>
-
+    
         <div class="form-group">
             <label for="id_profile_image_url">Profile Image URL:</label>
             {{ form.profile_image_url }}
         </div>
-
-        <!-- Submit and Cancel buttons -->
+    
         <div class="form-buttons">
             <button type="submit" class="btn btn-primary">Update Profile</button>
-            <a href="{% url 'show_profile' profile.pk %}" class="btn btn-secondary">Cancel</a>
+            <a href="{% url 'show_profile' %}" class="btn btn-secondary">Cancel</a>
         </div>
     </form>
+    {% if form.errors %}
+    <ul class="errorlist">
+        {% for field, errors in form.errors.items %}
+            <li>{{ field }}: {{ errors|join:", " }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
 {% endblock content %}
