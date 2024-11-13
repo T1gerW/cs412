@@ -19,7 +19,9 @@ class VoterFilterForm(forms.Form):
     max_birth_year = forms.ChoiceField(choices=BIRTH_YEAR_CHOICES, required=False, label="Max Year of Birth")
     VOTER_SCORE_CHOICES = [(i, i) for i in range(0, 6)]
     voter_score = forms.ChoiceField(choices=VOTER_SCORE_CHOICES, required=False)
-    v20state = forms.BooleanField(required=False, label="Voted in 2020 State Election")
-    v21town = forms.BooleanField(required=False, label="Voted in 2021 Town Election")
-    v22general = forms.BooleanField(required=False, label="Voted in 2022 General Election")
-    v23town = forms.BooleanField(required=False, label="Voted in 2023 Town Election")
+    v20state = forms.BooleanField(required=False, label="v20state", initial= False)
+    v21town = forms.BooleanField(required=False, label="v21town", initial= False)
+    v22primary = forms.BooleanField(required=False, label="v21primary", initial= False)
+    v22general = forms.BooleanField(required=False, label="v22general", initial= False)
+    v23town = forms.BooleanField(required=False, label="v23town", initial= False)
+
