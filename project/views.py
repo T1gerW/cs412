@@ -154,33 +154,25 @@ def homepage(request):
         
 @login_required
 def make_payment(request):
-    if request.user.is_superuser:
-        # If the user is an admin, allow them to choose the member
-        members = Member.objects.all()
-        member = None
-    else:
-        # If the user is a normal user, default to their associated member profile
-        try:
-            member = request.user.member
-        except Member.DoesNotExist:
-            return redirect('homepage')  # Redirect normal users without a member profile
+    # Get the current user's member profile
+    try:
+        member = request.user.member
+    except Member.DoesNotExist:
+        return render(request, 'project/no_profile.html', {'message': "You do not have a member profile."})
 
     if request.method == 'POST':
-        form = PaymentForm(request.POST)
+        form = PaymentForm(request.POST, is_superuser=request.user.is_superuser)
         if form.is_valid():
             payment = form.save(commit=False)
+            # For non-superusers, default to their associated member
             if not request.user.is_superuser:
-                payment.member = member  # Set the member for normal users
+                payment.member = member
             payment.save()
-            return redirect('member_detail', pk=payment.member.pk)
+            return redirect('member_detail', pk=member.pk)
     else:
-        form = PaymentForm()
+        form = PaymentForm(is_superuser=request.user.is_superuser)
 
-    return render(request, 'project/make_payment.html', {
-        'form': form,
-        'member': member,
-        'members': members if request.user.is_superuser else None,
-    })
+    return render(request, 'project/make_payment.html', {'form': form, 'member': member})
 
 @login_required
 def create_checkin(request, pk):

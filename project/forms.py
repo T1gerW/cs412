@@ -43,10 +43,7 @@ class PaymentForm(forms.ModelForm):
         model = Payment
         fields = ['member', 'payment_method', 'amount']
 
-    def __init__(self, *args, **kwargs):
-        user = kwargs.pop('user', None)  # Get the user from the view
+    def __init__(self, *args, is_superuser=False, **kwargs):
         super().__init__(*args, **kwargs)
-
-        if user and not user.is_superuser:
-            # Hide the 'member' field for normal users
-            self.fields.pop('member', None)
+        if not is_superuser:
+            self.fields.pop('member')  # Remove member field for non-superusers
