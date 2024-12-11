@@ -2,7 +2,6 @@
 
 {% block content %}
 <h1>{{ object.first_name }} {{ object.last_name }}</h1>
-{% endif %}
 <p>Email: {{ object.email }}</p>
 <p>Phone: {{ object.phone_number }}</p>
 <p>Membership Type: {% if object.membership_type %}{{ object.membership_type.name }}{% else %}No Membership Type Assigned{% endif %}</p>
