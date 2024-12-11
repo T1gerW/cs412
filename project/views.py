@@ -133,20 +133,29 @@ def homepage(request):
 # Function-based view for making a payment
 @login_required
 def make_payment(request):
-    try:
-        member = request.user.member  # Get the logged-in user's member profile
-    except Member.DoesNotExist:
-        return render(request, 'project/no_profile.html', {'message': "You do not have a member profile."})
+    # Check if the logged-in user is a superuser
+    if request.user.is_superuser:
+        member = None  # Superusers don't have an associated member
+    else:
+        try:
+            # Retrieve the member associated with the logged-in user
+            member = request.user.member
+        except Member.DoesNotExist:
+            # For non-superusers without a member profile, redirect to the homepage
+            return redirect('homepage')
 
     if request.method == 'POST':
+        # Pass is_superuser flag to customize the form
         form = PaymentForm(request.POST, is_superuser=request.user.is_superuser)
         if form.is_valid():
             payment = form.save(commit=False)
+            # For regular users, associate the payment with their member profile
             if not request.user.is_superuser:
-                payment.member = member  # Associate payment with the logged-in user
+                payment.member = member
             payment.save()
-            return redirect('member_detail', pk=member.pk)  # Redirect to the member's detail page
+            return redirect('member_detail', pk=member.pk if member else form.cleaned_data['member'].pk)
     else:
+        # Initialize the form, allowing superusers to select a member
         form = PaymentForm(is_superuser=request.user.is_superuser)
 
     return render(request, 'project/make_payment.html', {'form': form, 'member': member})

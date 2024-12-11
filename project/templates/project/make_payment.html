@@ -3,8 +3,11 @@
 {% block content %}
 <h2>Make a Payment</h2>
 
-<p>Membership Type: {{ member.membership_type.name }}</p>
-<p>Amount Due: ${{ member.membership_type.price }}</p>
+{% if not user.is_superuser %}
+    <p>Member: {{ member.first_name }} {{ member.last_name }}</p>
+    <p>Membership Type: {{ member.membership_type.name }}</p>
+    <p>Amount Due: ${{ member.membership_type.price }}</p>
+{% endif %}
 
 <form method="post">
     {% csrf_token %}
@@ -12,5 +15,5 @@
     <button type="submit">Submit Payment</button>
 </form>
 
-<a href="{% url 'member_detail' member.pk %}">Cancel</a>
+<a href="{% url 'homepage' %}">Cancel</a>
 {% endblock %}
