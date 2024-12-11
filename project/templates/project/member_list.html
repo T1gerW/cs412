@@ -1,0 +1,10 @@
+{% extends 'project/base.html' %}
+
+{% block content %}
+<h2>Members</h2>
+<ul>
+    {% for member in object_list %}
+        <li><a href="{% url 'member_detail' member.pk %}">{{ member.first_name }} {{ member.last_name }}</a></li>
+    {% endfor %}
+</ul>
+{% endblock %}

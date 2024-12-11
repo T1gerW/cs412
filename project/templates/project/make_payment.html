@@ -1,0 +1,24 @@
+{% extends 'project/base.html' %}
+
+{% block content %}
+<h2>Make a Payment</h2>
+
+{% if user.is_superuser %}
+    <p>You are making a payment as an admin. Please select the member:</p>
+{% else %}
+    <p>Your membership type: {{ member.membership_type.name }}</p>
+    <p>Amount due: ${{ member.membership_type.price }}</p>
+{% endif %}
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit Payment</button>
+</form>
+
+{% if user.is_superuser %}
+    <a href="{% url 'member_list' %}">Back to Members</a>
+{% else %}
+    <a href="{% url 'member_detail' user.member.pk %}">Cancel</a>
+{% endif %}
+{% endblock %}

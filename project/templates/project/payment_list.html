@@ -1,0 +1,11 @@
+{% extends 'project/base.html' %}
+
+{% block content %}
+<h1>Payments</h1>
+<ul>
+    {% for payment in object_list %}
+        <li><a href="{% url 'payment_detail' payment.pk %}">${{ payment.amount }} - {{ payment.member}} - {{ payment.payment_date }}</a></li>
+    {% endfor %}
+</ul>
+<a href="{% url 'member_list' %}">View Members</a>
+{% endblock %}

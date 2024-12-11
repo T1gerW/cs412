@@ -1,0 +1,12 @@
+{% extends 'project/base.html' %}
+
+{% block content %}
+<h2>Add New Member</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <p>Expiration date will be automatically calculated based on the membership type.</p>
+    <button type="submit">Add Member</button>
+</form>
+<a href="{% url 'member_list' %}">Cancel</a>
+{% endblock %}

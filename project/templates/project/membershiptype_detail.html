@@ -1,0 +1,9 @@
+{% extends 'project/base.html' %}
+
+{% block content %}
+<h1>{{ object.name }}</h1>
+<p>Duration: {{ object.duration }} months</p>
+<p>Price: ${{ object.price }}</p>
+<p>Description: {{ object.description }}</p>
+<a href="{% url 'membershiptype_list' %}">Back to Membership Types</a>
+{% endblock %}

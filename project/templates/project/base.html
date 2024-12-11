@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gym Membership Management</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'project/styles.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Gym Membership Management</h1>
+    </header>
+
+    <nav>
+        {% if user.is_authenticated %}
+            {% if user.is_superuser %}
+                <a href="{% url 'membershiptype_list' %}">Membership Types</a>
+                <a href="{% url 'member_list' %}">All Members</a>
+                <a href="{% url 'payment_list' %}">Payments</a>
+                <a href="{% url 'checkin_list' %}">Check-Ins</a>
+            {% else %}
+                <a href="{% url 'membershiptype_list' %}">Membership Types</a>
+                {% if user.member %}
+                    <a href="{% url 'member_detail' user.member.pk %}">My Details</a>
+                {% else %}
+                    <span>No Member Profile Assigned</span>
+                {% endif %}
+            {% endif %}
+            <form method="post" action="{% url 'logout' %}" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" style="border: none; background: none; color: #007BFF; cursor: pointer; text-decoration: underline;">Logout</button>
+            </form>
+        {% else %}
+            <a href="{% url 'login' %}">Login</a>
+        {% endif %}
+    </nav>
+    
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Gym Membership Management. All rights reserved.</p>
+    </footer>
+</body>
+</html>

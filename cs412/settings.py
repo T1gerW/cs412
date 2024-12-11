@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "blog", ##class 5 app
     "mini_fb", ##assignment 5
     'voter_analytics', #assignment 10
+    "project", 
 ]
 
 MIDDLEWARE = [
@@ -154,4 +155,8 @@ MEDIA_URL = '/media/'
 
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+LOGIN_URL = '/login/'  # Redirect to login page if not authenticated
+LOGIN_REDIRECT_URL = '/'  # Redirect after successful login
+
 

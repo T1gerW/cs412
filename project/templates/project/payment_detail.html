@@ -1,0 +1,12 @@
+{% extends 'project/base.html' %}
+
+{% block content %}
+<h1>Payment Details</h1>
+<p>Member: {{ object.member.first_name }} {{ object.member.last_name }}</p>
+<p>Amount: ${{ object.amount }}</p>
+<p>Date: {{ object.payment_date }}</p>
+<p>Method: {{ object.get_payment_method_display }}</p>
+<p>Notes: {{ object.notes }}</p>
+<a href="{% url 'payment_list' %}">Back to Payments</a>
+{% endblock %}
+

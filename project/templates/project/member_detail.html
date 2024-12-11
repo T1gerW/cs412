@@ -1,0 +1,27 @@
+{% extends 'project/base.html' %}
+
+{% block content %}
+<h1>{{ object.first_name }} {{ object.last_name }}</h1>
+{% endif %}
+<p>Email: {{ object.email }}</p>
+<p>Phone: {{ object.phone_number }}</p>
+<p>Membership Type: {% if object.membership_type %}{{ object.membership_type.name }}{% else %}No Membership Type Assigned{% endif %}</p>
+<p>Join Date: {{ object.join_date }}</p>
+<p>Expiration Date: {{ object.expiration_date }}</p>
+<p>Last Payment Date: {{ object.last_payment_date }}</p>
+
+<a href="{% url 'update_member' object.pk %}">Update Information</a>
+<a href="{% url 'make_payment' %}">Make Payment</a>
+<a href="{% url 'create_checkin' object.pk %}" class="btn btn-primary">Check In</a>
+<a href="{% url 'workout_data' object.pk %}" class="btn btn-secondary">Your Workout Data</a>
+
+<h2>Check-In History</h2>
+<a href="{% url 'checkin_history' object.pk %}" class="btn btn-secondary">View Full Check-In History</a>
+
+
+
+
+{% if user.is_superuser %}
+    <a href="{% url 'member_list' %}">Back to Members</a> <!-- Only visible for admins -->
+{% endif %}
+{% endblock %}

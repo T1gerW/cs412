@@ -1,0 +1,16 @@
+{% extends 'project/base.html' %}
+
+{% block content %}
+<h2>Workout Data for {{ member.first_name }} {{ member.last_name }}</h2>
+
+<p>Total Check-Ins: {{ total_checkins }}</p>
+{% if total_checkins > 0 %}
+    <p>Average Weekly Check-Ins: {{ avg_weekly_checkins|floatformat:2 }}</p>
+    <h3>Weekly Comparison</h3>
+    <p>Check-Ins This Week: {{ this_week_checkins }}</p>
+    <p>Check-Ins Last Week: {{ last_week_checkins }}</p>
+{% endif %}
+<p><strong>{{ message }}</strong></p>
+
+<a href="{% url 'member_detail' member.pk %}">Back to Member Details</a>
+{% endblock %}

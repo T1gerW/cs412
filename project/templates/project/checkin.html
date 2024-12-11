@@ -1,0 +1,26 @@
+{% extends 'project/base.html' %}
+
+{% block content %}
+<h2>Check-Ins</h2>
+<table border="1">
+    <thead>
+        <tr>
+            <th>Member</th>
+            <th>Check-In Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for checkin in checkins %}
+        <tr>
+            <td>{{ checkin.member.first_name }} {{ checkin.member.last_name }}</td>
+            <td>{{ checkin.check_in_date }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="2">No check-ins recorded.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+

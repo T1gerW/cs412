@@ -1,0 +1,14 @@
+{% extends 'project/base.html' %}
+
+{% block content %}
+<h2>Register</h2>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <h3>Account Information</h3>
+    {{ user_form.as_p }}
+    <h3>Member Information</h3>
+    {{ member_form.as_p }}
+    <button type="submit">Register</button>
+</form>
+<p>Already have an account? <a href="{% url 'login' %}">Login here</a>.</p>
+{% endblock %}
